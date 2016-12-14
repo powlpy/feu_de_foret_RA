@@ -91,7 +91,7 @@ public class Inflammable : MonoBehaviour {
         }
 
         //L'arbre se dégrade
-        conditionValue -= 0.01f * fireValue;
+		conditionValue -= 0.01f * fireValue * GlobalVariables.Speed / 2;
         conditionValue = Mathf.Clamp(conditionValue, 0f, 1000f);
         if(conditionValue < 5f) {
             isBurnt = true;

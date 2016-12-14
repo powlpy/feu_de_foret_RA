@@ -74,5 +74,13 @@ public class GlobalVariables : MonoBehaviour {
         windDirection = angle;
     }
 
+	public static void Reset () {
+		Heat = 0;
+		Speed = 1f;
+		State = 0;
+		windPower = 30f;
+		windDirection = Mathf.PI / 4f;
+		minRadiusFire = 10f;
+	}
 }
 

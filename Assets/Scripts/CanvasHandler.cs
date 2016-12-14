@@ -64,6 +64,8 @@ public class CanvasHandler : MonoBehaviour {
     public void Restart() {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+		GlobalVariables.Reset ();
+		Time.timeScale = 1;
     }
 
 }
