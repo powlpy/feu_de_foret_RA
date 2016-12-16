@@ -5,16 +5,16 @@ public class TreesSetup : MonoBehaviour {
 
     public GameObject TreePrefab;
 
-    private float[] sizeSetup = new float[] { 0f, 40f, 40f, 80f, 80f, 150f, 150f};
-    private int[] nbTreesSetup = new int[] { 0, 40, 160, 120, 300, 500, 1300 };
-    
+    private float[] sizeSetup = new float[] { 0f, 100f, 100f, 160f, 160f, 300f, 300f}; // Old : { 0f, 40f, 40f, 80f, 80f, 150f, 150f};
+    private int[] nbTreesSetup = new int[] { 0, 40, 100, 80, 200, 300, 500 };    // Old : { 0, 40, 160, 120, 300, 500, 1300 }; 
+
 
     public void Setup(int setup) {
         StartCoroutine(MyDelayMethod(setup));
     }
 
 
-    void DeletreTrees() {
+    void DeleteTrees() {
         GameObject[] Trees = GameObject.FindGameObjectsWithTag("Tree");
         foreach (GameObject Tree in Trees) {
             Destroy(Tree);
@@ -23,7 +23,7 @@ public class TreesSetup : MonoBehaviour {
     }
 
     IEnumerator MyDelayMethod(int setup) {
-        DeletreTrees();
+        DeleteTrees();
         yield return new WaitForSeconds(0);
         DoSetup(setup);
     }
