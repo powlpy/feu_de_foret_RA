@@ -6,7 +6,7 @@ public class WindHandler : MonoBehaviour {
 
     public void OnClick() {
 
-        Vector2 myPosition = GUIUtility.ScreenToGUIPoint(Input.mousePosition); //- RectTransformUtility.WorldToScreenPoint(null, transform.position);//GUIUtility.ScreenToGUIPoint(Input.mousePosition)
+        Vector2 myPosition = GUIUtility.ScreenToGUIPoint(Input.GetTouch(0).position) - RectTransformUtility.WorldToScreenPoint(null, transform.position);// Input.GetTouch(0).position OR Input.mousePosition
         GameObject temp = transform.Find("Image").Find("Mark").gameObject;
         Image myMark = temp.GetComponentInChildren<Image>();
 
