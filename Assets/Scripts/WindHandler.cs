@@ -5,8 +5,12 @@ using UnityEngine.UI;
 public class WindHandler : MonoBehaviour {
 
     public void OnClick() {
+        Vector2 myPosition;
+        if (Input.touchCount == 0)
+            myPosition = Input.mousePosition - transform.position;
+        else
+            myPosition = Input.GetTouch(0).position - (Vector2)transform.position;
 
-        Vector2 myPosition = GUIUtility.ScreenToGUIPoint(Input.GetTouch(0).position) - RectTransformUtility.WorldToScreenPoint(null, transform.position);// Input.GetTouch(0).position OR Input.mousePosition
         GameObject temp = transform.Find("Image").Find("Mark").gameObject;
         Image myMark = temp.GetComponentInChildren<Image>();
 

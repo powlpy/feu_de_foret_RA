@@ -62,7 +62,7 @@ public class VehiclesBehavior : MonoBehaviour {
 
         GameObject flyingVehicle = (GameObject)Instantiate(myPrefab);
         Vector3 myPosition = RandomCircle(bombardmentPosition, 75f);
-        myPosition.y = 15f;
+        myPosition.y = 65f;
         flyingVehicle.transform.position = myPosition;
         flyingVehicle.transform.LookAt(bombardmentPosition);
         Quaternion myRotation = flyingVehicle.transform.rotation;

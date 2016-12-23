@@ -46,7 +46,7 @@ public class FiretruckBehavior : MonoBehaviour {
                 if (collider.transform.parent.GetComponent<Inflammable>().IsBurning())
                     FightFire(collider.transform.parent.GetComponent<Inflammable>());
                 else {
-                    foreach (Collider tree in Physics.OverlapSphere(transform.position, 15f)) {
+                    foreach (Collider tree in Physics.OverlapSphere(transform.position, 70f)) {
                         if (tree.transform.parent != null)
                             if (tree.transform.parent.tag == "Tree")
                                 if (tree.GetComponentInParent<Inflammable>().IsBurning())
@@ -62,7 +62,7 @@ public class FiretruckBehavior : MonoBehaviour {
     void CheckFireNeighbors() {
         if (myTree != null) {
             bool continueFighting = false;
-            Collider[] closeTrees = Physics.OverlapSphere(myTree.transform.position, 7f);
+            Collider[] closeTrees = Physics.OverlapSphere(myTree.transform.position, 30f);
             int i = 0;
             while (!continueFighting && i < closeTrees.Length) {
                 Collider tempTree = closeTrees[i];
@@ -78,7 +78,7 @@ public class FiretruckBehavior : MonoBehaviour {
         }
 
         if (!isFighting) {
-            foreach (Collider tree in Physics.OverlapSphere(transform.position, 15f))
+            foreach (Collider tree in Physics.OverlapSphere(transform.position, 70f))
                 if (tree.transform.parent != null)
                     if (tree.transform.parent.tag == "Tree")
                         if (tree.GetComponentInParent<Inflammable>().IsBurning())
@@ -104,7 +104,7 @@ public class FiretruckBehavior : MonoBehaviour {
 
         //Vector3 myCenter = transform.TransformPoint(WaterStreamFX.GetComponent<SphereCollider>().center);
         Vector3 myCenter = WaterStreamFX.GetComponentInChildren<SphereCollider>().transform.position;
-        foreach (Collider collider in Physics.OverlapSphere(myCenter, 7f)) {
+        foreach (Collider collider in Physics.OverlapSphere(myCenter, 30f)) {
             if (collider.transform.parent != null)
                 if (collider.transform.parent.tag == "Tree")
                     collider.GetComponentInParent<Inflammable>().Watered();

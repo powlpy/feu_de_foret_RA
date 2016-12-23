@@ -207,6 +207,7 @@ public class Inflammable : MonoBehaviour {
         Vector3 f2 = f1 + (direction * focalDist);
         maxDistance = focalDist + GlobalVariables.minRadiusFire; // modification de la distance max
                                                                  //Tableau contenant les colliders proches
+        maxDistance *= 10;
         Collider[] closeColliders = Physics.OverlapSphere(transform.position, maxDistance);
         //Pour chacun d'entre eux
         foreach (Collider closeCollider in closeColliders) {
