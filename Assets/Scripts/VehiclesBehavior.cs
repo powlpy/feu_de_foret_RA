@@ -24,13 +24,15 @@ public class VehiclesBehavior : MonoBehaviour {
         Vector3 maxBounds = GlobalVariables.GetBoundingBoxMax();
         Vector3 flagPosition = GameObject.Find("Cylinder").transform.position;
         
+		/*
         bool isValid = false;
         foreach (Collider collider in Physics.OverlapSphere(flagPosition, 3f))
             if (collider.transform.parent != null)
                 if (collider.transform.parent.tag == "Tree")
                     isValid = true;
-        if (!isValid)
-            return;
+        
+		if (!isValid)
+            return;//*/
 
         float boundsSize = Vector3.Distance(maxBounds, minBounds);
         Vector3 centerBounds = (minBounds + maxBounds) / 2;
@@ -39,15 +41,18 @@ public class VehiclesBehavior : MonoBehaviour {
         myDirection.Normalize();
         //myDirection += new Vector3(Random.value / 2f, 0, Random.value / 2f);
         Vector3 myPosition = flagPosition + myDirection * (0.5f * boundsSize);
-        
+
         GameObject fireTruck = (GameObject)Instantiate(FireTruck);
-        myPosition.y = 0.25f;
+		myPosition.y = 13.5f; // recalibrage
         fireTruck.transform.position = myPosition;
         fireTruck.transform.LookAt(flagPosition);
         fireTruck.transform.Rotate(-90f, 0f, -90f);
         fireTruck.GetComponent<FiretruckBehavior>().SetFightingLocation(flagPosition);
-
-
+		/*
+		Debug.Log ("flag : " + flagPosition);
+		Debug.Log ("center : " + centerBounds);
+		Debug.Log ("direc : " + FireTruck.transform.right);
+		Debug.Log ("pos : " + myPosition);//*/
     }
 
     public void GoFlyingVehicle(int type) {

@@ -34,8 +34,12 @@ public class FiretruckBehavior : MonoBehaviour {
         if (GlobalVariables.State == 0) return;
         if (!isMoving) return;
 
-        transform.position += transform.right * Time.deltaTime * speed * GlobalVariables.Speed;
+		Vector3 d = transform.right;
+		d.y = 0f;
+        transform.position += d * Time.deltaTime * speed * GlobalVariables.Speed;
 
+		//Debug.Log ("direc : " + transform.right);
+		//Debug.Log ("pos : " + transform.position);
 
     }
 
