@@ -18,6 +18,8 @@ public class Inflammable : MonoBehaviour {
     private int status = 0; //0: intact, 1: damaged, 2: burnt
     private bool isMarked = false;
 
+	private Color colorTree;
+
     void Awake() {
 
         inflammability = Random.Range(0f, 1.5f);
@@ -32,11 +34,14 @@ public class Inflammable : MonoBehaviour {
 
         
         //random Z-axis rotation pour plus de diversité
-        transform.Find("Visual").Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
+		// Y-axis pour low-poly
+        transform.Find("Visual").Rotate(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
 
         //random scale pour plus de diversité
         float mySize = Random.Range(-0.1f, 0.1f);
         transform.Find("Visual").localScale += new Vector3(mySize, mySize, mySize);
+
+		colorTree = transform.Find ("Visual").GetComponent<Renderer> ().materials[0].color;
         
     }
 
@@ -105,7 +110,8 @@ public class Inflammable : MonoBehaviour {
     void RenderFire() {
         if (!IsBurning()) return;
         if(GlobalVariables.Speed > 0)
-            myFireEffect.startLifetime = (1f * fireValue / 100f) / GlobalVariables.Speed;
+			myFireEffect.startLifetime = (3f + (3f * fireValue / 100f)) / GlobalVariables.Speed;
+		myFireEffect.startSpeed = GlobalVariables.Speed;
 
     }
 
@@ -124,13 +130,13 @@ public class Inflammable : MonoBehaviour {
     void UpdateMaterials() {
         if (isMarked) return;
         Renderer myRenderer = transform.Find("Visual").GetComponent<Renderer>();
-        float myCutoff = 1f - conditionValue / 2000f;
-        myRenderer.materials[4].SetFloat("_Cutoff", myCutoff);
+        //float myCutoff = 1f - conditionValue / 2000f;
+        //myRenderer.materials[4].SetFloat("_Cutoff", myCutoff);
         float greyLevel = conditionValue / 1000f;
-        myRenderer.materials[0].color = new Color(greyLevel, greyLevel, greyLevel, 1f);
-        myRenderer.materials[1].color = new Color(greyLevel, greyLevel, greyLevel, 1f);
-        myRenderer.materials[2].color = new Color(greyLevel, greyLevel, greyLevel, 1f);
-        myRenderer.materials[3].color = new Color(greyLevel, greyLevel, greyLevel, 1f);
+		myRenderer.materials[0].color = new Color(greyLevel * colorTree.r, greyLevel * colorTree.g, greyLevel * colorTree.b, 1f);
+        //myRenderer.materials[1].color = new Color(greyLevel, greyLevel, greyLevel, 1f);
+        //myRenderer.materials[2].color = new Color(greyLevel, greyLevel, greyLevel, 1f);
+        //myRenderer.materials[3].color = new Color(greyLevel, greyLevel, greyLevel, 1f);
     }
 
     //Reçoit le feu de son voisin
